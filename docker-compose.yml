@@ -3,7 +3,7 @@ services:
 
   mongodb:
     image: 'mongo:latest'
-    container_name: mongodb
+    container_name: mongodb_demo
     environment:
       - MONGO_DATA_DIR=/data/db
       - MONGO_LOG_DIR=/dev/null
@@ -21,4 +21,14 @@ services:
   hystrix-dashboard:
     image: 'schibstedspain/turbine-hystrix-dashboard'
     ports:
-      - '6161:6161'
+      - '7979:7979'
+      
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    environment:
+      GF_INSTALL_PLUGINS: "grafana-piechart-panel,grafana-simple-json-datasource"
+      GRAFANA_USER: admin
+      GRAFANA_PASS: admin
